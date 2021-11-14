@@ -31,8 +31,12 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
+      - name: Genereate Codecov report
+        run: vendor/bin/phpunit --coverage-xml ./reports
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
+          directory: ./reports
